@@ -6,7 +6,6 @@ function h($str){
 }
 
 
-
 //1.  DB接続します
 try {
   //Password:MAMP='root',XAMPP=''
