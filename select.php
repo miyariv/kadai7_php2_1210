@@ -36,6 +36,7 @@ if ($status==false) {
     $bookName = h($result['bookName']);
     $bookURL = h($result['bookURL']);
     $bookComment = h($result['bookComment']);
+    $id = h($result['id']);
 
     $view .= "
         <tr>
@@ -44,10 +45,10 @@ if ($status==false) {
             <td>{$bookURL}</td>
             <td>{$bookComment}</td>
             <td>{$result['date']}</td>
+            <td><a href='detail.php?id={$id}'> 編集 </td>
+            <td><a href='delete.php?id={$id}'> 削除 </td>
         </tr>";
-    // viewにresultの中のnameを格納
   }
-
 }
 ?>
 
@@ -115,6 +116,8 @@ if ($status==false) {
             <th scope="col">書籍URL</th>
             <th scope="col">書籍コメント</th>
             <th scope="col">登録日時</th>
+            <th scope="col">編集</th>
+            <th scope="col">削除</th>
         </tr>
         <?= $view ?>
         </table>
@@ -123,8 +126,6 @@ if ($status==false) {
         <button class="lead-wire" onclick="location.href='./index.php'">書籍を追加登録する</button>
     </div>
 </div>
-
-
 <!-- Main[End] -->
 
 </body>
