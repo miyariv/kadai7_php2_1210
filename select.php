@@ -1,12 +1,7 @@
 <?php
+require_once('funcs.php');
+$pdo = db_conn();
 
-// XSS対策
-function h($str){
-   return htmlspecialchars($str, ENT_QUOTES);
-}
-
-
-//1.  DB接続します
 try {
   //Password:MAMP='root',XAMPP=''
   $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
@@ -26,13 +21,8 @@ if ($status==false) {
   exit("ErrorQuery:".$error[2]);
 
 }else{
-    // elseの中は、SQL実行成功した場合
-  //Selectデータの数だけ自動でループしてくれる
-  //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     // stftの部分で、1行取得して、それをresultに配列として格納している。中身がなくなったら終了。
-    // $view .= '<tr><td>' . $result['id'] . '</td><td>' . h($result['bookName']) . '</td><td>' . h($result['bookURL']) . '</td><td>' . h($result['bookComment']) . '</td><td>' . $result['date'] . '</td></tr>';
-
     $bookName = h($result['bookName']);
     $bookURL = h($result['bookURL']);
     $bookComment = h($result['bookComment']);
