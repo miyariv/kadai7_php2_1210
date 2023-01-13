@@ -19,8 +19,6 @@
 </head>
 
 <body>
-
-    <!-- Head[Start] -->
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -28,9 +26,7 @@
             </div>
         </nav>
     </header>
-    <!-- Head[End] -->
 
-    <!-- Main[Start] -->
     <form method="post" action="insert.php">
         <div class="jumbotron">
             <fieldset>
@@ -49,9 +45,6 @@
     <div class="wire_area">
         <button class="lead-wire" onclick="location.href='./select.php'">書籍一覧をみる</button>
     </div>
-    <!-- Main[End] -->
-
-
 </body>
 
 </html>

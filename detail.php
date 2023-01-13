@@ -7,18 +7,14 @@ require_once('funcs.php');
 $pdo = db_conn();
 
 // 対応するidのデータを取得 
-$stmt = $pdo->prepare('SELECT * FROM gs_bn_table WHERE id = :id;');
+$stmt = $pdo->prepare('SELECT * FROM gs_bm_table WHERE id = :id;');
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
 // 処理後
 if ($status === false) {
-    //*** function化する！******\
-    $error = $stmt->errorInfo();
-    exit('SQLError:' . print_r($error, true));
+    sql_error($stmt);
 } else {
-    //*** function化する！*****************
-    // データが取得できた場合の処理
     $result = $stmt->fetch();
 }
 ?>
@@ -57,20 +53,11 @@ if ($status === false) {
     <form method="post" action="update.php">
         <div class="jumbotron">
             <fieldset>
-                <!-- <legend>書籍の新規登録</legend>
+                <legend>書籍の新規登録</legend>
                 <label>書籍名：<input type="text" name="bookName" value="<?= h($result['bookName'])?>"></label><br>
                 <label>書籍URL：<textArea name="bookURL" rows="1" cols="40"><?= h($result['bookURL'])?></textArea></label><br>
                 <label>書籍コメント：<textArea name="bookComment" rows="4" cols="40"><?= h($result['bookComment'])?></textArea></label><br>
                 <input type="hidden" name="id" value="<?= h($result['id'])?>">
-                <div>
-                    <input type="submit" value="更新">
-                </div> -->
-
-                <legend>書籍の新規登録</legend>
-                <label>書籍名：<input type="text" name="bookName"></label><br>
-                <label>書籍URL：<textArea name="bookURL" rows="1" cols="40"></textArea></label><br>
-                <label>書籍コメント：<textArea name="bookComment" rows="4" cols="40"></textArea></label><br>
-                <input type="hidden" name="id">
                 <div>
                     <input type="submit" value="更新">
                 </div>

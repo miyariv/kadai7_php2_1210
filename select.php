@@ -2,23 +2,12 @@
 require_once('funcs.php');
 $pdo = db_conn();
 
-try {
-  //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
-} catch (PDOException $e) {
-  exit('DBConnectError'.$e->getMessage());
-}
-
-//２．データ取得SQL作成
 $stmt = $pdo->prepare("SELECT * FROM gs_bm_table;");
 $status = $stmt->execute();
 
-//３．データ表示
 $view="";
 if ($status==false) {
-    //execute（SQL実行時にエラーがある場合）
-  $error = $stmt->errorInfo();
-  exit("ErrorQuery:".$error[2]);
+    sql_error($stmt);
 
 }else{
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -86,7 +75,7 @@ if ($status==false) {
     </style>
 </head>
 <body id="main">
-<!-- Head[Start] -->
+
 <header>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -94,9 +83,7 @@ if ($status==false) {
     </div>
   </nav>
 </header>
-<!-- Head[End] -->
 
-<!-- Main[Start] -->
 <div>
     <div class>
         <table>
@@ -116,7 +103,5 @@ if ($status==false) {
         <button class="lead-wire" onclick="location.href='./index.php'">書籍を追加登録する</button>
     </div>
 </div>
-<!-- Main[End] -->
-
 </body>
 </html>
